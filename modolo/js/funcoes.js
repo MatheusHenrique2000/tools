@@ -1,3 +1,10 @@
+//---------------------------------------------------
+// Criado por Matheus henrique
+//
+// Funcoes é uma classe que axilia no desenvolvimento com javascript
+// Declare a classe em uma variavel e execute help() para informações das funções disponiveis
+//---------------------------------------------------
+
 export default class Funcoes{
     constructor(){}
 
@@ -51,5 +58,56 @@ export default class Funcoes{
             s[c[i]](i);
         };
         return r;
-    };   
+    };
+    
+//------------------------------------------------------
+    help(){
+        console.log(`
+--------------funcoes disponiveis--------------
+f.dom(c,cp)
+-----------------------------------------------
+Para consultar sobre a funcao:
+help'Funcao'()
+`);
+    };
+
+    helpDom(){
+        console.log(`
+--------------------- dom ---------------------
+Retorna/ Modifica nodes html, altera a DOM
+-----------------------------------------------
+Parametros:
+c:
+    string com instrucoes para interagir
+    com a DOM
+    exemplo: c = '#id .class div[0]'
+
+    valor default: esperado string
+
+cp:
+    objeto contendo um caminho da DOM
+    Por este objeto que ser� iniciado a
+    interacao com a DOM
+    exemplo:
+    cp = document.getElementsByTagName('div')
+
+    valor default: document
+
+-----------------------------------------------
+instrucoes aceitas no parametro 'c':
+    '#'  --> retorna o node pelo id - '#node'    
+    '.'  --> retorna o node pela class - '.node'
+    ' '  --> retorna o node pela
+             tagname - ' node'
+    '[]' --> retorna o node
+             pelo indice - '[indice]'
+    '=-' --> remove o node - 'node =-'
+    '>+' --> insere um node apos
+             o node atual - '>+node' 
+    '<+' --> insere um node antes
+             do node atual - '<+node'
+    '=+' --> insere um node dentro
+             do node atual - '=+node'
+    '<<' --> retorna o node anterior - 'node <<'
+`);
 };
