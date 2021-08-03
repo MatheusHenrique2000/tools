@@ -1,4 +1,4 @@
-# Sobre modolo
+# Sobre modelo
 
 Aqui publico modulos que possam ser ussados durante o desenvolvimento
 
