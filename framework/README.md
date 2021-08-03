@@ -1,4 +1,4 @@
 # Sobre framework
-Publicarei aqui frameworks
+Aqui publico frameworks
 
-Classificados por tecnologia
+Estão separados por tecnologia
