@@ -86,7 +86,7 @@ c:
 
 cp:
     objeto contendo um caminho da DOM
-    Por este objeto que ser� iniciado a
+    Por este objeto que sera iniciado a
     interacao com a DOM
     exemplo:
     cp = document.getElementsByTagName('div')
