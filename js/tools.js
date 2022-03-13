@@ -33,5 +33,14 @@ tools.isObject = function(a){
     return (typeof a !== 'undefined' ? Object.prototype.toString.call(a) == '[object Object]': false)
 };
 
+tools.isCollide = function(a, b){
+    return !(
+        ((a.offsetTop  + a.offsetHeight) < b.offsetTop ) ||
+        ((b.offsetTop  + b.offsetHeight) < a.offsetTop ) ||
+        ((a.offsetLeft + a.offsetWidth ) < b.offsetLeft) ||
+        ((b.offsetLeft + b.offsetWidth ) < a.offsetLeft)
+    );
+}
+
 typeof module !== 'undefined' && (module.exports = tools);
 typeof window !== 'undefined' && (window.tools = tools);
