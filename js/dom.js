@@ -191,6 +191,15 @@ window.dom = function(str,objHtml){
             var father = res.parentNode;
             res = father.insertBefore(ins, res);
             // insert before
+        },
+        '~':function(el){
+            if(el._find(':')){
+                ar = el._split(':');
+                res.style[ar[0]] = ar[1];
+                return res = res.style[ar[0]]
+            };
+            
+            res = getComputedStyle(res)[el];
         }
     };
 
