@@ -1,8 +1,5 @@
 var tools = {};
 
-tools.afterLoad = function(actions=()=>{}){
-    window.addEventListener('load',actions)
-};
 
 tools._switch = function (key,par,...arg){
     var res = [], exeDf = true, _case, _default;
@@ -33,14 +30,28 @@ tools.isObject = function(a){
     return (typeof a !== 'undefined' ? Object.prototype.toString.call(a) == '[object Object]': false)
 };
 
-tools.isCollide = function(a, b){
-    return !(
-        ((a.offsetTop  + a.offsetHeight) < b.offsetTop ) ||
-        ((b.offsetTop  + b.offsetHeight) < a.offsetTop ) ||
-        ((a.offsetLeft + a.offsetWidth ) < b.offsetLeft) ||
-        ((b.offsetLeft + b.offsetWidth ) < a.offsetLeft)
-    );
+tools.toBinary = function(n){
+    Number((n).toString(2));
 }
+
+// --- HTML functions ---
+
+typeof window !== 'undefined' && (function(){
+
+    tools.afterLoad = function(actions=()=>{}){
+        window.addEventListener('load',actions)
+    };
+
+    tools.isCollide = function(a, b){
+        return !(
+            ((a.offsetTop  + a.offsetHeight) < b.offsetTop ) ||
+            ((b.offsetTop  + b.offsetHeight) < a.offsetTop ) ||
+            ((a.offsetLeft + a.offsetWidth ) < b.offsetLeft) ||
+            ((b.offsetLeft + b.offsetWidth ) < a.offsetLeft)
+        );
+    }
+
+})();
 
 typeof module !== 'undefined' && (module.exports = tools);
 typeof window !== 'undefined' && (window.tools = tools);
