@@ -1,7 +1,7 @@
 var tools = {};
 
 
-tools._switch = function (key,par,...arg){
+tools._switch = function _switch(key,par,...arg){
     var res = [], exeDf = true, _case, _default;
 
     _case = arg.slice(0,arg.length - 1);
@@ -26,23 +26,23 @@ tools._switch = function (key,par,...arg){
     return res
 };
 
-tools.isObject = function(a){
+tools.isObject = function isObject(a){
     return (typeof a !== 'undefined' ? Object.prototype.toString.call(a) == '[object Object]': false)
 };
 
-tools.toBinary = function(n){
-    Number((n).toString(2));
+tools.toBinary = function toBinary(n){
+    return Number((n).toString(2));
 }
 
 // --- HTML functions ---
 
 typeof window !== 'undefined' && (function(){
 
-    tools.afterLoad = function(actions=()=>{}){
+    tools.afterLoad = function afterLoad(actions=()=>{}){
         window.addEventListener('load',actions)
     };
 
-    tools.isCollide = function(a, b){
+    tools.isCollide = function isCollide(a, b){
         return !(
             ((a.offsetTop  + a.offsetHeight) < b.offsetTop ) ||
             ((b.offsetTop  + b.offsetHeight) < a.offsetTop ) ||
