@@ -34,7 +34,9 @@ window.dom = function(str,objHtml){
     function isHtml(obj1){
         return (typeof obj1 !== 'undefined' ? !!(Object.prototype.toString.call(obj1).match('HTML')): false)
     };
-
+    function isHtmlCollection(obj1){
+        return (typeof obj1 !== 'undefined' ? Object.prototype.toString.call(obj1) == '[object HTMLCollection]': false)
+    }
     //---
 
     function convertToArray(str,exe){
@@ -177,18 +179,57 @@ window.dom = function(str,objHtml){
         '[':function(el){res = res[el]},
         '=-':function(el){res.remove()},
         '=+':function(el){
-            var ins = document.createElement(el);
+            /* var ins = document.createElement(el);
+            res = res.appendChild(ins); */
+
+            var ins;
+
+            if(isHtmlCollection(res)){
+                ins = document.createElement(el);
+                ar = [...res];
+                ar1 = [];
+                for (i in ar) { ar1[ar1.length] = res[i].appendChild(ins); };
+                return res = ar1;
+            }
+
+            ins = document.createElement(el);
             res = res.appendChild(ins);
         },
         '<+':function(el){
-            var ins = document.createElement(el);
-            var father = res.parentNode;
+            var ins,father;
+
+            if(isHtmlCollection(res)){
+                ins = document.createElement(el);
+                ar = [...res];
+                ar1 = [];
+                for (i in ar) {
+                    father = ar[i].parentNode;
+                    ar1[ar1.length] = father.insertBefore(ins, ar[i].nextSibling);
+                };
+                return res = ar1;
+            }
+
+            ins = document.createElement(el);
+            father = res.parentNode;
             res = father.insertBefore(ins, res.nextSibling);
             // insert after
         },
         '>+':function(el){
-            var ins = document.createElement(el);
-            var father = res.parentNode;
+            var ins,father;
+
+            if(isHtmlCollection(res)){
+                ins = document.createElement(el);
+                ar = [...res];
+                ar1 = [];
+                for (i in ar) {
+                    father = ar[i].parentNode;
+                    ar1[ar1.length] = father.insertBefore(ins, ar[i]);
+                };
+                return res = ar1;
+            }
+
+            ins = document.createElement(el);
+            father = res.parentNode;
             res = father.insertBefore(ins, res);
             // insert before
         },
