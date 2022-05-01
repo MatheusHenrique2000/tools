@@ -1,7 +1,8 @@
+// The functions is ordered by number of upercase letter after by alphabetic
+
 var tools = {};
 
-
-tools._switch = function _switch(key,par,...arg){
+tools.switch = function _switch(key,par,...arg){
     var res = [], exeDf = true, _case, _default;
 
     _case = arg.slice(0,arg.length - 1);
@@ -26,6 +27,12 @@ tools._switch = function _switch(key,par,...arg){
     return res
 };
 
+tools.toggle = function toggle(){
+    obj = arguments.callee.caller;
+    obj == null && (obj = this);
+    return (obj._toggle = (typeof obj._toggle == 'undefined' || obj._toggle == false ? true : false));
+}
+
 tools.isObject = function isObject(a){
     return (typeof a !== 'undefined' ? Object.prototype.toString.call(a) == '[object Object]': false)
 };
@@ -42,6 +49,35 @@ typeof window !== 'undefined' && (function(){
         window.addEventListener('load',actions)
     };
 
+    tools.comparePath = function comparePath(path1, path2){
+        // debugger
+        if(arguments.callee.caller.name != 'comparePath'){
+            fn = f_comparePath.bind(comparePath,arguments);
+            return fn()
+        };
+        
+        for(var i in arguments[0]){
+            var el = arguments[0][i];
+            if(typeof el !== 'string'){
+                this['pathText'+i] = '';
+                if(typeof el === 'undefined'|| typeof el.path === 'undefined'){return false}
+                el = el.path;
+                for(var ii in el){this['pathText'+i] += String(el[ii].nodeName)}
+            }else{
+                this['pathText'+i] = el.split(' ').join('');
+            }
+        }
+        // debugger
+        return (this.pathText0 == this.pathText1);
+    }
+
+    tools.getPath = function getPath(){
+        window.addEventListener('click',function f_getPathListener(e){
+            f_getPath.path = e.path;
+            window.removeEventListener('click',f_getPathListener);
+        });
+    };
+
     tools.isCollide = function isCollide(a, b){
         return !(
             ((a.offsetTop  + a.offsetHeight) < b.offsetTop ) ||
@@ -49,7 +85,7 @@ typeof window !== 'undefined' && (function(){
             ((a.offsetLeft + a.offsetWidth ) < b.offsetLeft) ||
             ((b.offsetLeft + b.offsetWidth ) < a.offsetLeft)
         );
-    }
+    };
 
 })();
 
